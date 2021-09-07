@@ -8,6 +8,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'dagger.hilt.android.plugin'
 apply from: 'variants.gradle'
 
 def preDexEnabled = "true" == System.getProperty("pre-dex", "true")
@@ -92,6 +94,18 @@ dependencies {
   implementation "io.reactivex.rxjava2:rxjava:$rxVersion"
   implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
   implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+
+  //Activity KTX for viewModels
+  implementation "androidx.activity:activity-ktx:1.3.1"
+
+  //Dagger Hilt
+  implementation "com.google.dagger:hilt-android:2.36"
+  kapt "com.google.dagger:hilt-android-compiler:2.36"
+  kapt "androidx.hilt:hilt-compiler:1.0.0"
+
+  //Navigation Component
+  implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
+  implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
 
   // Timber
   implementation 'com.jakewharton.timber:timber:4.7.1'

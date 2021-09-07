@@ -1,6 +1,5 @@
 package com.mutualmobile.praxis.injection.module
 
-import com.mutualmobile.praxis.AppConstants
 import com.mutualmobile.praxis.BuildConfig
 import com.mutualmobile.praxis.framework.CoroutineApiService
 import com.mutualmobile.praxis.framework.RxApiService
