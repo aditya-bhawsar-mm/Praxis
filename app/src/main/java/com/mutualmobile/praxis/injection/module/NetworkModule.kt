@@ -2,8 +2,8 @@ package com.mutualmobile.praxis.injection.module
 
 import com.mutualmobile.praxis.AppConstants
 import com.mutualmobile.praxis.BuildConfig
-import com.mutualmobile.praxis.data.services.CoroutineApiService
-import com.mutualmobile.praxis.data.services.RxApiService
+import com.mutualmobile.praxis.framework.CoroutineApiService
+import com.mutualmobile.praxis.framework.RxApiService
 import com.mutualmobile.praxis.repo.JokeRepo
 import dagger.Module
 import dagger.Provides

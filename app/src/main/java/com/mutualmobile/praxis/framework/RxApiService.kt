@@ -1,4 +1,4 @@
-package com.mutualmobile.praxis.data.services
+package com.mutualmobile.praxis.framework
 
 import com.mutualmobile.praxis.data.model.JokeListResponse
 import io.reactivex.Single
