@@ -62,6 +62,9 @@ kapt {
 dependencies {
 
   implementation project(':networkmodule')
+  implementation project(':domain')
+  implementation project(':data')
+  implementation project(':usecases')
 
   // Kotlin
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"

@@ -1,3 +1,4 @@
 include ':app', ':networkmodule'
 include ':data'
 include ':domain'
+include ':usecases'
