@@ -27,15 +27,6 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    internal fun provideRxSchedulers(): IRxSchedulers {
-        return object : IRxSchedulers {
-            override fun main() = AndroidSchedulers.mainThread()
-            override fun io() = Schedulers.io()
-        }
-    }
-
-    @Provides
-    @Singleton
     internal fun provideOkHttpClient(): OkHttpClient {
         val httpBuilder = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {

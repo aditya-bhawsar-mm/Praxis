@@ -1,5 +1,5 @@
 package com.mutualmobile.praxis.data
 
-class JokesRepository {
+class JokesRepository (private val jokesServiceProvider: JokesServiceProvider) {
 
 }
