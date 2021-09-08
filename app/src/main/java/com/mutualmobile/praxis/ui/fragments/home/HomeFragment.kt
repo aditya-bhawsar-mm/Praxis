@@ -3,11 +3,14 @@ package com.mutualmobile.praxis.ui.fragments.home
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mutualmobile.praxis.R
+import com.mutualmobile.praxis.data.model.JokeResponse
 import com.mutualmobile.praxis.databinding.FragmentHomeBinding
+import com.mutualmobile.praxis.domain.JokesResponse
 import com.mutualmobile.praxis.utils.ResponseWrapper
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,8 +28,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         _binding = DataBindingUtil.bind(view)
 
         binding.apply {
-            randomJokesButtonCoroutine.setOnClickListener { viewModel.loadDataRx() }
-            randomJokesButtonRx.setOnClickListener { viewModel.loadCoroutineData() }
+            randomJokesButtonCoroutine.setOnClickListener { viewModel.loadCoroutineData() }
+            randomJokesButtonRx.setOnClickListener { viewModel.loadDataRx() }
             aboutButton.setOnClickListener { showAboutFragment() }
         }
 
@@ -38,11 +41,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
                 is ResponseWrapper.Success->{
                     handleDataLoadingUi(false)
-
+                    showJokeFragment(responded.data)
                     viewModel.resetResponse()
                 }
                 is ResponseWrapper.Error->{
                     handleDataLoadingUi(false)
+                    errorToast(responded.message?:"Something Went Wrong")
                     viewModel.resetResponse()
                 }
             }
@@ -63,9 +67,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         _binding = null
     }
 
-    private fun showJokeActivity(bundle: Bundle) {
+    private fun errorToast(msg: String){
+        Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+    }
 
-        ActivityNavigator.startActivityWithDataAndAnimation(ShowJokeActivity::class.java, bundle, R.anim.slide_left_in, R.anim.slide_left_out, this)
+    private fun showJokeFragment(jokeResponse: JokesResponse?) {
+        var jokeString = ""
+        jokeResponse?.let {
+            for (joke in it.value) {
+                jokeString = jokeString + joke.joke.replace("&quot;", "\"") + "\n\n"
+            }
+        }
+
+        val action = HomeFragmentDirections.actionHomeFragmentToJokeFragment(jokeString)
+        findNavController().navigate(action)
     }
 
     private fun showAboutFragment() { findNavController().navigate(R.id.action_homeFragment_to_aboutDialog) }

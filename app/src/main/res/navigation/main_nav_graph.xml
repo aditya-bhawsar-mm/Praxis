@@ -22,5 +22,10 @@
     <fragment
         android:id="@+id/jokeFragment"
         android:name="com.mutualmobile.praxis.ui.fragments.joke.JokeFragment"
-        android:label="Praxis" />
+        android:label="Praxis" >
+        <argument
+            android:name="jokes"
+            app:argType="string"
+            />
+    </fragment>
 </navigation>

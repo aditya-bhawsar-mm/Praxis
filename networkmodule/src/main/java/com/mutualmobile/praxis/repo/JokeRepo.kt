@@ -2,11 +2,10 @@ package com.mutualmobile.praxis.repo
 
 import com.mutualmobile.praxis.NetworkResult
 import com.mutualmobile.praxis.data.model.JokeListResponse
-import com.mutualmobile.praxis.framework.CoroutineApiService
 
-class JokeRepo constructor(private val coroutineApiService: com.mutualmobile.praxis.framework.CoroutineApiService) {
+class JokeRepo constructor() {
 
-  suspend fun getFiveRandomJokes(): NetworkResult<JokeListResponse> {
+  /*suspend fun getFiveRandomJokes(): NetworkResult<JokeListResponse> {
     val response = coroutineApiService.getFiveRandomJokes()
     if (response.isSuccessful) {
       val data = response.body()
@@ -15,5 +14,5 @@ class JokeRepo constructor(private val coroutineApiService: com.mutualmobile.pra
       }
     }
     return NetworkResult.Failure(response)
-  }
+  }*/
 }

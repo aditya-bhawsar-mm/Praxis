@@ -7,17 +7,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.DialogFragment
 import com.mutualmobile.praxis.R
 import com.mutualmobile.praxis.databinding.FragmentAboutDialogBinding
 
-class AboutDialogFragment : Fragment() {
+class AboutDialogFragment : DialogFragment() {
 
-    private lateinit var binding: FragmentAboutDialogBinding
+    private var _binding: FragmentAboutDialogBinding? = null
+    private val binding : FragmentAboutDialogBinding
+        get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about_dialog, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about_dialog, container, false)
         binding.mutualMobileWebLink.movementMethod = LinkMovementMethod.getInstance()
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
