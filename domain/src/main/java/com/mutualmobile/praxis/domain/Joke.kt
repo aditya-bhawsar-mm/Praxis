@@ -1,4 +1,6 @@
 package com.mutualmobile.praxis.domain
 
-class Joke {
-}
+data class Joke(
+    var id: Int,
+    var joke: String
+)
