@@ -5,9 +5,7 @@ import com.mutualmobile.praxis.domain.JokesResponse
 import com.mutualmobile.praxis.domain.NetworkResult
 import java.io.IOException
 
-class CoroutineInteraction(
-    private val apiService: CoroutineApiService
-) : JokesServiceProvider
+class CoroutineInteraction(private val apiService: CoroutineApiService) : JokesServiceProvider
 {
     override suspend fun getFiveRandomJokes(): NetworkResult<JokesResponse?> {
         lateinit var networkResult :NetworkResult<JokesResponse?>

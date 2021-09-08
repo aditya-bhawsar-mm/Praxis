@@ -5,7 +5,6 @@ import com.mutualmobile.praxis.domain.NetworkResult
 
 class JokesRepository (private val jokesServiceProvider: JokesServiceProvider) {
 
-    suspend fun getJokesFromProvider() : NetworkResult<JokesResponse?> =
-            jokesServiceProvider.getFiveRandomJokes()
+    suspend fun getJokesFromProvider(): NetworkResult<JokesResponse?> = jokesServiceProvider.getFiveRandomJokes()
 
 }
