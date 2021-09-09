@@ -26,15 +26,15 @@ class HomeViewModel @Inject constructor(private val getJokesUseCase: GetJokesUse
     val jokesData : LiveData<ResponseWrapper<JokesResponse>>
         get() = _jokesData
 
-    fun resetResponse(){ _jokesData.postValue(ResponseWrapper.Waiting()) }
+    fun resetResponse(){ _jokesData.value= ResponseWrapper.Waiting() }
 
     fun loadCoroutineData() = viewModelScope.launch {
-        _jokesData.postValue(ResponseWrapper.Loading())
+        _jokesData.value = ResponseWrapper.Loading()
         try {
             val response = withContext(Dispatchers.IO) { getJokesUseCase() }
-            _jokesData.postValue(handleResponse(response))
+            _jokesData.value = handleResponse(response)
         } catch (e: Exception) {
-            _jokesData.postValue(ResponseWrapper.Error("Something Went Wrong"))
+            _jokesData.value = ResponseWrapper.Error("Something Went Wrong")
         }
     }
 
@@ -53,6 +53,11 @@ class HomeViewModel @Inject constructor(private val getJokesUseCase: GetJokesUse
     @Inject lateinit var schedulers: IRxSchedulers
     @Inject lateinit var rxApiService: RxApiService
     private var compositeDisposable: CompositeDisposable? = null
+
+    private fun addDisposable(disposable: Disposable) {
+        if (compositeDisposable == null) { compositeDisposable = CompositeDisposable() }
+        compositeDisposable!!.add(disposable)
+    }
 
     fun loadDataRx() {
         _jokesData.postValue(ResponseWrapper.Loading())
@@ -77,10 +82,4 @@ class HomeViewModel @Inject constructor(private val getJokesUseCase: GetJokesUse
         }
         compositeDisposable = null
     }
-
-    private fun addDisposable(disposable: Disposable) {
-        if (compositeDisposable == null) { compositeDisposable = CompositeDisposable() }
-        compositeDisposable!!.add(disposable)
-    }
-
 }

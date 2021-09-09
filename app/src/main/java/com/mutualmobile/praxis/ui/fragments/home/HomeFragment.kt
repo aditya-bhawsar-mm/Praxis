@@ -53,20 +53,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun handleDataLoadingUi(loading: Boolean) {
-        binding.apply {
-            progressbar.visibility = if (loading) View.VISIBLE else View.INVISIBLE
-            randomJokesButtonCoroutine.isEnabled = !loading
-            randomJokesButtonRx.isEnabled = !loading
-            aboutButton.isEnabled = !loading
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     private fun errorToast(msg: String){
         Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
     }
@@ -84,4 +70,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun showAboutFragment() { findNavController().navigate(R.id.action_homeFragment_to_aboutDialog) }
+
+    private fun handleDataLoadingUi(loading: Boolean) {
+        binding.apply {
+            progressbar.visibility = if (loading) View.VISIBLE else View.INVISIBLE
+            randomJokesButtonCoroutine.isEnabled = !loading
+            randomJokesButtonRx.isEnabled = !loading
+            aboutButton.isEnabled = !loading
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

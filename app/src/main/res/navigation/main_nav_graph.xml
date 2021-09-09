@@ -13,6 +13,10 @@
             app:destination="@id/aboutDialog" />
         <action
             android:id="@+id/action_homeFragment_to_jokeFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
             app:destination="@id/jokeFragment" />
     </fragment>
     <dialog
